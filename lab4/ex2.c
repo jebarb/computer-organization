@@ -11,12 +11,9 @@ void main() {
 
     printf("Please enter %d strings, one per line:\n", NUM);
 
-    while (i < NUM && fgets(str[i],LEN,stdin)) {
-        for (j = 0; j < LEN; j++) {
-            if (str[i][j] == '\n')
-                str[i][j] = '\0';
-        }
-        ++i;
+    for (i = 0; i < NUM; i++) {
+        fgets(str[i],LEN,stdin);
+        str[i][strlen(str[i])-1] = '\0';
     }
 
     puts("\nHere are the strings in the order you entered:");
@@ -26,7 +23,6 @@ void main() {
 
     do {
         sorted = 1;
-        puts("test");
         for (i = 0; i < NUM - 1; i++) {
             if (strncmp(str[i],str[i+1],LEN) > 0) {
                 sorted = 0;

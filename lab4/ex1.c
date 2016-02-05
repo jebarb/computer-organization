@@ -5,25 +5,23 @@
 
 char str[NUM][LEN];
 
-void swap(int first, int second) {
-
+void swap(int s1, int s2) {
     char temp;
     int i;
-    for (i = 0; str[first][i] != '\0' || str[second][i] != '\0'; i++) {
-        temp = str[second][i];
-        str[second][i] = str[first][i];
-        str[first][i] = temp;
+    for (i = 0; str[s1][i] != '\0' || str[s2][i] != '\0'; i++) {
+        temp = str[s2][i];
+        str[s2][i] = str[s1][i];
+        str[s1][i] = temp;
     }
 }
 
-int compare(int first, int second, int i) {
-
-    if (str[first][i] == '\0') {
+int compare(int s1, int s2, int i) {
+    if (str[s1][i] < str[s2][i] || str[s1][i] == '\0') {
         return 1;
-    } else if (str[first][i] == str[second][i]) {
-        compare(first, second, ++i);
-    } else if (str[first][i] > str[second][i]) {
-        swap(first, second);
+    } else if (str[s1][i] == str[s2][i]) {
+        compare(s1, s2, ++i);
+    } else if (str[s2][i] == '\0' || str[s1][i] > str[s2][i]) {
+        swap(s1, s2);
         return 0;
     }
 }
@@ -34,12 +32,12 @@ void main() {
 
     printf("Please enter %d strings, one per line:\n", NUM);
 
-    while (i < NUM && fgets(str[i],LEN,stdin)) {
+    for (i = 0; i < NUM; i++) {
+        fgets(str[i],LEN,stdin);
         for (j = 0; j < LEN; j++) {
             if (str[i][j] == '\n')
                 str[i][j] = '\0';
         }
-        ++i;
     }
 
     puts("\nHere are the strings in the order you entered:");

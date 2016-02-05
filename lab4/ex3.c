@@ -7,16 +7,16 @@
 
 void main() {
 
-    int i, j, sorted;
-    char* str[NUM];
+    int i, sorted, size;
+    char *str[NUM];
 
     printf("Please enter %d strings, one per line:\n", NUM);
 
     for (i = 0; i < NUM; i++) {
-        char* tmp = (char*) malloc(LEN);
+        char *tmp;
         fgets(tmp,LEN,stdin);
-        int size = strlen(tmp);
-        str[i] = (char*) malloc(size);
+        size = strlen(tmp);
+        str[i] = malloc(size);
         memcpy(str[i],tmp,size);
         str[i][size-1] = '\0';
     }
@@ -31,10 +31,9 @@ void main() {
         for (i = 0; i < NUM - 1; i++) {
             if (strncmp(str[i],str[i+1],LEN) > 0) {
                 sorted = 0;
-                char *tmp = (char*) malloc(strlen(str[i])+1);
-                memcpy(tmp,str[i],strlen(str[i])+1);
-                memcpy(str[i],str[i+1],strlen(str[i+1])+1);
-                memcpy(str[i+1],tmp,strlen(tmp)+1);
+                char *tmp = str[i];
+                str[i] = str[i+1];
+                str[i+1] = tmp;
             }
         }
     } while (!sorted);

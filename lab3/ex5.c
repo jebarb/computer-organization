@@ -1,9 +1,9 @@
 #include <stdio.h>
-#define MAX 47 //47th fib number is > 32 bits
+#define MAX 1000 //47th fib number is > 32 bits
 
-int fib[MAX];
+long long int fib[MAX];
 
-int fibonacci(int n)
+long long int fibonacci(int n)
 {
     if (fib[n] == -1) 
         fib[n] = fibonacci(n-1)+fibonacci(n-2);
@@ -12,7 +12,7 @@ int fibonacci(int n)
 
 void main()
 {
-    int n,i;
+    long long int n,i;
 
     fib[0] = 0;
     fib[1] = 1;
@@ -22,9 +22,9 @@ void main()
     do
     {
         puts("Enter a number:");
-        scanf("%d",&n);
+        scanf("%lld",&n);
         if (n >= 0 && n < MAX)
-            printf("fibonacci(%d) = %d\n",n,fibonacci(n));
+            printf("fibonacci(%lld) = %lld\n",n,fibonacci(n));
         else
             printf("Error\n");
     } while (n != 0);
