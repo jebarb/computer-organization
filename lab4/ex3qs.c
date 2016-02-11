@@ -5,10 +5,40 @@
 #define NUM 25   /* number of strings */
 #define LEN 1000  /* max length of each string */
 
+char *str[NUM];
+
+int partition(int lo, int hi) {
+    int pivot = lo;
+    int i = lo - 1;
+    int j = hi + 1;
+
+    while (1) {
+        do {
+            i++;
+        } while (strcmp(str[i],str[pivot]) < 0);
+        do {
+            j--;
+        } while (strcmp(str[j],str[pivot]) > 0);
+        if (i >= j) {
+            return j;
+        }
+        char *tmp = str[i];
+        str[i] = str[j];
+        str[j] = tmp;
+    }
+}
+
+void quicksort(int lo, int hi) {
+    if (lo < hi) {
+        int p = partition(lo, hi);
+        quicksort(lo, p);
+        quicksort(p+1, hi);
+    }
+}
+
 void main() {
 
     int i, sorted, size;
-    char *str[NUM];
 
     printf("Please enter %d strings, one per line:\n", NUM);
 
@@ -27,17 +57,7 @@ void main() {
     for (i = 0; i < NUM; i++)
         printf("%s\n",str[i]);
 
-    do {
-        sorted = 1;
-        for (i = 0; i < NUM - 1; i++) {
-            if (strncmp(str[i],str[i+1],LEN) > 0) {
-                sorted = 0;
-                char *tmp = str[i];
-                str[i] = str[i+1];
-                str[i+1] = tmp;
-            }
-        }
-    } while (!sorted);
+    quicksort(0, NUM-1);
 
     puts("\nIn alphabetical order, the strings are:");     
     for (i = 0; i < NUM; i++) {
