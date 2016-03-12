@@ -23,7 +23,7 @@
 	finishString:	.asciiz	"Finished."
 	newline:	.asciiz	"\n"
 	pixels:		.word 	0x00010000,	0x010101,	0x6,		0x3333, 
-				0x030c,		0x700853,	0x294999,       -1
+				0x030c,		0x700853,	0x0294999,      -1
 
 .text 0x3000
 
@@ -35,22 +35,14 @@ main:
 
 #------- INSERT YOUR CODE HERE -------
 
-     sw    $0, 0($0)
-     lw    $9, 0($0)
-     
-outer:
-     lw    $8, 0($0)
-     lw    $11, 0($0)
-
-inner:
-     add   $12, $9, $11
-     lb    $10, pixels($12)
+loop:
+     lw    $10, pixels($9)
      beq   $10, -1, exit
-     lbu   $10, pixels($12)
+     add   $10, $9, $11
+     lbu   $10, pixels($10)
      add   $8, $8, $10
      addi  $11, $11, 1
-     slti  $10, $11, 3
-     bne   $10, $0, inner
+     bne   $11, 3, loop
      div   $8, $11
      mflo  $8
      ori   $v0, $0, 1
@@ -60,7 +52,9 @@ inner:
      ori   $a0, $0, 43
      syscall
      addi  $9, $9, 4
-     j     outer
+     li    $8, 0
+     li    $11, 0
+     j     loop
 
 #------------ END CODE ---------------
 

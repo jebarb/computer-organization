@@ -13,7 +13,7 @@ main:
      lw    $9, 4($0)       # allocate register for i
      lw    $8, 0($0)       # choose register $8 to hold value for sum
 loop:
-     sll   $10, $9, 2     # covert "i" to word offset
+     #sll   $10, $9, 2     # covert "i" to word offset
      lw    $10, 8($10)   # load a[i]
      add   $8, $8, $10    # sum = sum + a[i];
      sw    $8, 0($0)       # update variable in memory

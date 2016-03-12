@@ -36,9 +36,9 @@ void quicksort(int lo, int hi) {
     }
 }
 
-void main() {
+int main() {
 
-    int i, sorted, size;
+    int i, size;
 
     printf("Please enter %d strings, one per line:\n", NUM);
 
@@ -64,4 +64,6 @@ void main() {
         puts(str[i]);
         free(str[i]);
     }
+
+    return 1;
 }
