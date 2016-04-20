@@ -36,4 +36,5 @@ void main() {
     quicksort(0, num-1);
     for (i = 0; i < num; i++)
         printf("%d\n", in[i]);
+    free(in);
 }
