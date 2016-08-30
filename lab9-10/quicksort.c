@@ -4,7 +4,7 @@
 int* in;
 
 int partition(int lo, int hi) {
-    int pivot = in[lo];
+    int pivot = in[(hi-lo)/2+lo];
     int i = lo - 1;
     int j = hi + 1;
     while (1) {
